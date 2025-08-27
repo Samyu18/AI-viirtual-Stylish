@@ -62,34 +62,34 @@ All features are functional except **2D outfit visualization**, which is still u
 ## 🖼️ Website Preview
 
 ### 🌸 Starting Page
-![Starting Page](assets/Home.png)
+![Starting Page](assests/Home.png)
 
 ### 🏠 Home Page
-![Home Page](assets/Home1.png)
+![Home Page](assests/Home1.png)
 
 ### 📌 Home Page (Continuation)
-![Home Page Continuation](assets/Home2.png)
+![Home Page Continuation](assests/Home2.png)
 
 ### 🎯 Personalized Suggestions
-![Personalized Suggestions](assets/get_personalized_suggestion.png)
+![Personalized Suggestions](assests/get_personalized_suggestion.png)
 
 ### ✅ Suggestions Output
-![Suggestions Output](assets/suggestion_output.png)
+![Suggestions Output](assests/suggestion_output.png)
 
 ### 🎨 Mood Board
-![Mood Board](assets/moodboard.png)
+![Mood Board](assests/moodboard.png)
 
 ### 📝 Style Quiz
-![Style Quiz](assets/quiz.png)
+![Style Quiz](assests/quiz.png)
 
 ### 👗 2D Preview (Under Development)
-![2D Preview](assets/2D_preview.png)
+![2D Preview](assests/2D_preview.png)
 
 ### 🎨 Skin Tone Detection
-![Skin Tone](assets/skintone.png)
+![Skin Tone](assests/skintone.png)
 
 ### ✅ Skin Tone Output
-![Skin Tone Output](assets/skintone_output.png)
+![Skin Tone Output](assests/skintone_output.png)
 
 
 ### Prerequisites
