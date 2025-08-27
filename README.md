@@ -59,6 +59,38 @@ All features are functional except **2D outfit visualization**, which is still u
 ---
 
 ## 🚀 Getting Started
+## 🖼️ Website Preview
+
+### 🌸 Starting Page
+![Starting Page](assets/Home.png)
+
+### 🏠 Home Page
+![Home Page](assets/Home1.png)
+
+### 📌 Home Page (Continuation)
+![Home Page Continuation](assets/Home2.png)
+
+### 🎯 Personalized Suggestions
+![Personalized Suggestions](assets/get_personalized_suggestion.png)
+
+### ✅ Suggestions Output
+![Suggestions Output](assets/suggestion_output.png)
+
+### 🎨 Mood Board
+![Mood Board](assets/moodboard.png)
+
+### 📝 Style Quiz
+![Style Quiz](assets/quiz.png)
+
+### 👗 2D Preview (Under Development)
+![2D Preview](assets/2D_preview.png)
+
+### 🎨 Skin Tone Detection
+![Skin Tone](assets/skintone.png)
+
+### ✅ Skin Tone Output
+![Skin Tone Output](assets/skintone_output.png)
+
 
 ### Prerequisites
 - Python 3.9+  
