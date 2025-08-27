@@ -1,4 +1,4 @@
-# Fashion-Portal# AI-viirtual-Stylish
+# Fashion-Portal# AI-virtual-Stylish
 # 👗 AI Virtual Stylist
 
 The **AI Virtual Stylist** is an intelligent fashion assistant that helps users discover and visualize outfits tailored to their **skin tone, mood, and personal style**.  
@@ -99,13 +99,19 @@ All features are functional except **2D outfit visualization**, which is still u
 
 ### Installation
 ```bash
-git clone https://github.com/Samyu18/AI-viirtual-Stylish.git
-cd AI-viirtual-Stylish
+git clone https://github.com/Samyu18/AI-virtual-Stylish.git
+cd AI-virtual-Stylish
 pip install -r requirements.txt
+## License
 
+This project is licensed under the **MIT License**.  
 
-### Installation
-```bash
-git clone https://github.com/Samyu18/AI-viirtual-Stylish.git
-cd AI-viirtual-Stylish
-pip install -r requirements.txt
+You are free to:
+
+- Use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software.  
+
+Conditions:
+
+- Include the original copyright and license notice in all copies or substantial portions of the software.  
+
+For full details, see the [LICENSE](LICENSE) file.
