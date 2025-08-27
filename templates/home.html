@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>AI Fashion Recommendation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" style="display: flex; align-items: center; justify-content: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.3); z-index: 9999;">
+        <div style="background: #d1b3e0; border-radius: 20px; box-shadow: 0 4px 32px rgba(0,0,0,0.15); padding: 40px 30px; text-align: center; min-width: 320px; max-width: 90vw;">
+            <div style="font-size: 2rem; margin-bottom: 10px; color: #fffbe7;">✨</div>
+            <h2 style="margin: 0 0 10px 0; color: #fff;">Welcome to Style Studio!</h2>
+            <p style="font-style: italic; color: #fff; margin-bottom: 20px;">"{{ quote }}"</p>
+            <button onclick="document.getElementById('welcomeModal').style.display='none'" style="background: #e0c3fc; color: #333; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; cursor: pointer;">Get Started!</button>
+        </div>
+    </div>
+    <div class="container">
+        {% if session.get('username') %}
+        <div style="margin: 20px 0 0 20px;">
+            <a href="/logout" class="btn-logout" style="background: linear-gradient(90deg, #e0c3fc, #8ec5fc); color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; cursor: pointer; text-decoration: none;">Logout</a>
+        </div>
+        {% endif %}
+        <div class="hero">
+            <h1>👗 AI Fashion Recommendation Portal 🎨</h1>
+            <p class="intro">
+                Get personalized dress suggestions based on your <b>skin tone</b> and <b>body shape</b>.
+                Try on outfits with 2D/3D visualization using your own face and dress pictures! 💃🕺
+            </p>
+            <a href="#features" class="btn-explore">Explore Features ⬇️</a>
+        </div>
+        <section id="features" class="features">
+            <h2>✨ Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item fadeIn">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>Personalized Suggestions</h3>
+                    <p>Get AI-powered dress and color recommendations tailored to your body type and skin tone.</p>
+                </div>
+                <div class="feature-item fadeIn">
+                    <i class="fas fa-user"></i>
+                    <h3>Face & Dress Try-On</h3>
+                    <p>Upload your face and dress to see how it looks with 2D and 3D try-on options.</p>
+                </div>
+                <div class="feature-item fadeIn">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI-Powered Analysis</h3>
+                    <p>Advanced AI models analyze body shapes and give accurate suggestions.</p>
+                </div>
+                <div class="feature-item fadeIn">
+                    <i class="fas fa-camera"></i>
+                    <h3>Real-Time Preview</h3>
+                    <p>Visualize the outfit instantly on your uploaded picture with AI-powered graphics.</p>
+                </div>
+            </div>
+        </section>
+        <div class="form-section">
+            <h2>🎯 Automatic Style Analysis</h2>
+            <div class="button-container">
+                <a href="/index" class="btn-analysis">Get Personalized Suggestions 🎯</a>
+                <a href="/skin_tone" class="btn-analysis">Skin Tone Detection 🎨</a>
+            </div>
+        </div>
+        <div class="upload-section">
+            <h2>📸 Upload Face & Dress for Try-On</h2>
+            <form action="/upload" method="post" enctype="multipart/form-data" class="animate-upload">
+                <label>Upload Face Picture:</label>
+                <input type="file" name="face" required>
+                <label>Upload Dress Picture:</label>
+                <input type="file" name="dress" required>
+
+                <button type="submit" class="btn-upload">Try-On Now! 🚀</button>
+            </form>
+        </div>
+        <div class="main-actions" style="display: flex; justify-content: center; gap: 16px; margin: 32px 0 24px 0;">
+            <a href="/quiz" style="background: #b47aea; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; cursor: pointer; text-decoration: none;">✨ Take Style Quiz ✨</a>
+            <a href="/moodboard" style="background: #f7b267; color: #fff; border: none; border-radius: 8px; padding: 10px 24px; font-size: 1rem; cursor: pointer; text-decoration: none;">🧩 Create Mood Board</a>
+        </div>
+    </div>
+    <footer style="background: #4b3576; color: #fff; padding: 32px 0 16px 0; margin-top: 40px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around; max-width: 1100px; margin: auto;">
+            <div style="min-width: 220px; margin-bottom: 20px;">
+                <h4>Contact Us</h4>
+                <p>📞 Phone: +1 (555) 123-4567</p>
+                <p>📧 Email: support@stylestudio.com</p>
+                <p>📍 Address: Fashion District, NY 10001</p>
+                <button style="background: linear-gradient(90deg, #6a82fb, #fc5c7d); color: #fff; border: none; border-radius: 8px; padding: 8px 18px; font-size: 1rem; cursor: pointer;">Send Message</button>
+            </div>
+            <div style="min-width: 220px; margin-bottom: 20px;">
+                <h4>Customer Care</h4>
+                <p>💬 Live Chat Support</p>
+                <p>📄 FAQ</p>
+                <p>🚚 Shipping Information</p>
+                <p>🔄 Returns & Exchanges</p>
+                <p>🔒 Privacy Policy</p>
+            </div>
+            <div style="min-width: 220px; margin-bottom: 20px;">
+                <h4>Follow Us</h4>
+                <p>📸 Instagram</p>
+                <p>📘 Facebook</p>
+                <p>🐦 Twitter</p>
+                <p>📌 Pinterest</p>
+            </div>
+        </div>
+        <div style="text-align: center; color: #fff; margin-top: 10px; font-size: 0.95rem;">© 2024 Style Studio. All rights reserved.</div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.fadeIn').each(function (i) {
+                $(this).delay(300 * i).animate({ opacity: 1, top: '0px' }, 800);
+            });
+        });
+    </script>
+</body>
+</html>

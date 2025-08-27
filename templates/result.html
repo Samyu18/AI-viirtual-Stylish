@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Fashion Recommendations</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #ffe0ec 0%, #f9c6d3 100%);
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: linear-gradient(135deg, #f8fafc 60%, #e9e4f0 100%);
+            border-radius: 18px;
+            box-shadow: 0 8px 32px rgba(44,62,80,0.12);
+            padding: 40px 32px 32px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        h2 {
+            color: #2d2e32;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        .subtitle {
+            color: #4a5568;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .recommendations {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 28px;
+            margin-top: 30px;
+            animation: fadeInUp 1s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .rec-card {
+            background: #f8f9fa;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(107,70,193,0.08);
+            width: 170px;
+            padding: 18px 12px 20px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.25s cubic-bezier(.23,1.01,.32,1), box-shadow 0.25s;
+            position: relative;
+        }
+        .rec-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(107,70,193,0.18);
+        }
+        .rec-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 14px;
+            object-fit: cover;
+            border: 3px solid #e9d8fd;
+            background: #eee;
+        }
+        .rec-label {
+            font-size: 1.1em;
+            color: #4a5568;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        .swatch {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 14px;
+            border: 3px solid #e9d8fd;
+            display: inline-block;
+        }
+        .tryon-section {
+            margin-top: 40px;
+            background: #f4f6fb;
+            border-radius: 14px;
+            padding: 32px 0 24px 0;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.06);
+        }
+        .tryon-section h3 {
+            color: #6b46c1;
+            margin-bottom: 12px;
+        }
+        .tryon-img {
+            max-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+        }
+        /* Animated notification styles */
+        .notif {
+            position: fixed;
+            right: 32px;
+            bottom: 32px;
+            background: linear-gradient(90deg, #fcb7b7 60%, #f7cac9 100%);
+            color: #6b46c1;
+            font-size: 1.08em;
+            font-weight: 600;
+            border-radius: 16px 16px 16px 0;
+            box-shadow: 0 4px 24px rgba(107,70,193,0.13);
+            padding: 22px 32px 18px 28px;
+            z-index: 1000;
+            min-width: 270px;
+            max-width: 340px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: notifIn 1.2s 0.7s cubic-bezier(.23,1.01,.32,1) forwards, notifPulse 2.5s 2s infinite alternate;
+        }
+        .notif i {
+            font-size: 1.5em;
+            color: #c94f7c;
+        }
+        @keyframes notifIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes notifPulse {
+            from { box-shadow: 0 4px 24px rgba(107,70,193,0.13); }
+            to { box-shadow: 0 8px 32px rgba(201,79,124,0.18); }
+        }
+        .animated-heading {
+            font-size: 2.1em;
+            font-weight: bold;
+            color: #6b46c1;
+            margin-bottom: 0.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            animation: popIn 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .animated-heading .emoji {
+            font-size: 1.3em;
+            animation: bounce 1.5s infinite alternate;
+        }
+        .heading-effect {
+            color: #c94f7c;
+            font-size: 1.1em;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+            animation: fadeIn 2s 0.5s both;
+        }
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes bounce {
+            from { transform: translateY(0); }
+            to { transform: translateY(-8px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .go-back-btn {
+            display: block;
+            margin: 40px auto 0 auto;
+            padding: 12px 32px;
+            background: linear-gradient(90deg, #fcb7b7 60%, #f7cac9 100%);
+            color: #6b46c1;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(107,70,193,0.10);
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .go-back-btn:hover {
+            background: linear-gradient(90deg, #f7cac9 60%, #fcb7b7 100%);
+            transform: scale(1.04);
+        }
+        .compare-box {
+            margin: 32px auto 0 auto;
+            background: #fff6fa;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(201,79,124,0.10);
+            padding: 24px 18px 18px 18px;
+            max-width: 520px;
+            text-align: center;
+        }
+        .compare-title {
+            font-size: 1.18em;
+            font-weight: 600;
+            color: #c94f7c;
+            margin-bottom: 18px;
+        }
+        .compare-images {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            gap: 18px;
+        }
+        .compare-item {
+            flex: 1;
+        }
+        .compare-label {
+            font-size: 1em;
+            color: #6b46c1;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .compare-img {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 1px 8px rgba(44,62,80,0.10);
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Animated, emoji-rich heading -->
+        <div class="animated-heading">
+            <span class="emoji">✨👗</span>
+            <span class="main-text">Your Personalized Outfit is Ready!</span>
+            <span class="emoji">🪄💃</span>
+        </div>
+        <div class="heading-effect">Discover your look below!</div>
+        <div class="recommendations">
+            {% set color_images = {
+                'Light Blue': '/static/dresses/light_blue/light_blue_dress2.jpg',
+                'Soft Pink': '/static/dresses/soft_pink/soft_pink_dress2.jpg',
+                'Lavender': '/static/dresses/lavender/lavender_dress2.jpg',
+                'Peach': '/static/dresses/peach/peach_dress2.jpg',
+                'Mint Green': '/static/dresses/mint_green/mint_green_dress2.jpg',
+                'Navy Blue': '/static/dresses/navy_blue/navy_blue_dress2.jpg',
+                'Emerald': '/static/dresses/emerald/emarald_dress2.jpg',
+                'Burgundy': '/static/dresses/burgundy/burgundy_dress2.jpg',
+                'Deep Red': '/static/dresses/deep_red/deep_red_dress2.jpg',
+                'Teal': '/static/dresses/teal/teal_dress2.jpg',
+                'Olive': '/static/dresses/olive/olive_dress2.jpg',
+                'Mustard': '/static/dresses/mustard/mustard_dress2.jpg',
+                'Coral': '/static/dresses/coral/coral_dress2.jpg',
+                'Plum': '/static/dresses/plum/plum_dress2.jpg',
+                'Charcoal': '/static/dresses/charcoal/charcoal_dress2.jpg',
+                'Maroon': '/static/dresses/maroon/maroon_dress2.jpg',
+                'Brown': '/static/dresses/brown/brown_dress2.jpg',
+                'Dark Green': '/static/dresses/dark_green/dark_green_dress2.jpg',
+                'Gold': '/static/dresses/gold/gold_dress2.jpg',
+                'Deep Orange': '/static/dresses/deep_orange/deep_orange_dress2.jpg',
+                'Rust': '/static/dresses/rust/rust_dress2.jpg',
+                'Ivory': '/static/dresses/ivory/ivory_dress2.jpg',
+                'Deep Purple': '/static/dresses/deep_purple/deep_purple_dress2.jpg',
+                'Burnt Orange': '/static/dresses/burnt_orange/deep_orange_dress2.jpg',
+                'Forest Green': '/static/dresses/forest_green/forest_green_dress2.jpg',
+            } %}
+        {% for item in recommendations %}
+                <div class="rec-card">
+                    {% if color_images[item] %}
+                        <img src="{{ color_images[item] }}" class="rec-img" alt="{{ item }} Dress">
+                    {% else %}
+                        <span class="swatch" style="background: {{ item|lower|replace(' ', '') }};"></span>
+                    {% endif %}
+                    <div class="rec-label">{{ item }}</div>
+                </div>
+        {% endfor %}
+        </div>
+    {% if output_image %}
+        <div class="tryon-section">
+        <h3>2D Try-On Result:</h3>
+            <img src="{{ output_image }}" alt="Try-On Result" class="tryon-img">
+        </div>
+        <!-- Show box with face, dress, and output images -->
+        <div class="compare-box">
+            <div class="compare-title">Your Dress and Face <span style='font-size:1.3em'>=</span> Output</div>
+            <div class="compare-images">
+                <div class="compare-item">
+                    <div class="compare-label">Face</div>
+                    <img src="{{ face_path }}" alt="Face" class="compare-img">
+                </div>
+                <div class="compare-item">
+                    <div class="compare-label">Dress</div>
+                    <img src="{{ dress_path }}" alt="Dress" class="compare-img">
+                </div>
+                <div class="compare-item">
+                    <div class="compare-label">Output</div>
+                    <img src="{{ output_image }}" alt="Output" class="compare-img">
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+    <div class="notif" id="notif">
+        <i class="fa-solid fa-heart"></i>
+        <span id="notifText">Here you go, your outfit!</span>
+    </div>
+    <button class="go-back-btn" onclick="window.history.back()">⬅️ Go Back</button>
+    <script>
+        // Notification message is now static and professional
+        // document.getElementById('notifText').textContent = 'Here you go, your outfit!';
+    </script>
+</body>
+</html>

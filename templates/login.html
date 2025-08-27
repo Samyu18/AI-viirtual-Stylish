@@ -1,0 +1,77 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - AI Fashion</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+        <label>Username:</label>
+        <input type="text" name="username" required><br>
+
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+-->
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Login - AI Fashion Portal</title>
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-box slide-in">
+            <h2>🔐 Welcome Back!</h2>
+            <p class="auth-desc">Login to access personalized AI fashion suggestions and 3D try-on! 💃</p>
+
+            <form action="/login" method="post" class="auth-form">
+                <div class="input-box">
+                    <input type="text" name="username" required>
+                    <label>Username</label>
+                </div>
+
+                <div class="input-box">
+                    <input type="password" name="password" required>
+                    <label>Password</label>
+                </div>
+
+                <button type="submit" class="btn-auth">Login 🚀</button>
+            </form>
+
+            <p class="switch-auth">
+                New here? <a href="/signup">Create an account ✨</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
+    <title>Login - AI Fashion</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login to AI Fashion</h2>
+        <form action="/login" method="post">
+            <label>👤 Username:</label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+
+            <label>🔒 Password:</label>
+            <input type="password" name="password" placeholder="Enter your password" required>
+
+            <button type="submit" class="btn">Login</button>
+
+            <p class="switch">Don't have an account? <a href="/signup">Sign Up</a></p>
+        </form>
+    </div>
+</body>
+</html>

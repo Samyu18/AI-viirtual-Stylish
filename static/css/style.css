@@ -1,0 +1,177 @@
+/* General Styling */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4, #fad0c4);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding-top: 20px;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.hero h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    animation: bounceIn 1.5s ease-in-out;
+}
+
+.intro {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    animation: fadeInUp 2s ease-in-out;
+}
+
+/* Authentication Buttons */
+.auth-links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-login, .btn-signup {
+    background-color: #ff7eb3;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    margin: 5px;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn-login:hover, .btn-signup:hover {
+    background-color: #ff4e6e;
+}
+
+/* Features Section */
+#features {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.features h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature-item {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    opacity: 0;
+    position: relative;
+    top: 30px;
+}
+
+.feature-item i {
+    font-size: 2em;
+    color: #ff758c;
+}
+
+.feature-item h3 {
+    margin-top: 10px;
+}
+
+/* Forms and Upload Section */
+.form-section, .upload-section {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+select, input[type="file"] {
+    padding: 10px;
+    width: 80%;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.btn-submit, .btn-upload {
+    background-color: #ff4e6e;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+.btn-submit:hover, .btn-upload:hover {
+    background-color: #ff7eb3;
+}
+
+/* Analysis Buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-analysis {
+    background-color: #ff4e6e;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 78, 110, 0.3);
+}
+
+.btn-analysis:hover {
+    background-color: #ff7eb3;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 78, 110, 0.4);
+}
+
+/* Animations */
+@keyframes bounceIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.fadeIn {
+    opacity: 0;
+    position: relative;
+    top: 30px;
+    transition: 0.8s;
+}

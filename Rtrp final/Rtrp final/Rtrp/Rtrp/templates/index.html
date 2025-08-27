@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Stylist - Find Your Style</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Stylist</h1>
+        <h2>Find the Best Colors & Outfits for You</h2>
+        <form action="/" method="POST">
+            <label for="skin_tone">Select Your Skin Tone:</label>
+            <select name="skin_tone" id="skin_tone" required>
+                <option value="">--Choose Skin Tone--</option>
+                {% for tone in skin_tones %}
+                    <option value="{{ tone }}">{{ tone }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="gender">Select Your Gender:</label>
+            <select name="gender" id="gender" required onchange="updateBodyShapes()">
+                <option value="">--Choose Gender--</option>
+                <option value="Men">Men</option>
+                <option value="Women">Women</option>
+            </select>
+
+            <label for="body_shape">Select Your Body Shape:</label>
+            <select name="body_shape" id="body_shape" required>
+                <option value="">--Choose Body Shape--</option>
+            </select>
+
+            <label for="size">Select Your Size:</label>
+            <select name="size" id="size" required>
+                <option value="">--Choose Size--</option>
+                {% for size in sizes %}
+                    <option value="{{ size }}">{{ size }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="height">Select Your Height:</label>
+            <select name="height" id="height" required>
+                <option value="">--Choose Height--</option>
+                {% for height in heights %}
+                    <option value="{{ height }}">{{ height }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="weight">Select Your Weight:</label>
+            <select name="weight" id="weight" required>
+                <option value="">--Choose Weight--</option>
+                {% for weight in weights %}
+                    <option value="{{ weight }}">{{ weight }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Get Recommendations</button>
+        </form>
+    </div>
+
+    <script>
+        // Body shape options for men and women
+        const bodyShapesMen = {{ body_shapes_men | tojson }};
+        const bodyShapesWomen = {{ body_shapes_women | tojson }};
+    
+        function updateBodyShapes() {
+            let gender = document.getElementById("gender").value;
+            let bodyShapeSelect = document.getElementById("body_shape");
+    
+            // Clear existing options
+            bodyShapeSelect.innerHTML = '<option value="">--Choose Body Shape--</option>';
+    
+            let bodyShapes = gender === "Men" ? bodyShapesMen : gender === "Women" ? bodyShapesWomen : {};
+
+            Object.keys(bodyShapes).forEach(shape => {
+                let option = document.createElement("option");
+                option.value = shape;
+                option.textContent = shape;
+                bodyShapeSelect.appendChild(option);
+            });
+        }
+    </script>
+</body>
+</html>

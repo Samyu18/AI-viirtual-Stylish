@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Styling Recommendations - Virtual Stylist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <style>
+        .color-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .color-box {
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            min-width: 130px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+            border: 2px solid black;
+            color: black;
+            cursor: pointer;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+        }
+
+        .dress-img {
+            width: 150px;
+            height: auto;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .try-again {
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .try-again:hover {
+            background-color: #e63946;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Virtual Stylist</h1>
+        <h2>Your Personalized Style Recommendations</h2>
+
+        <div class="result-box">
+            <h3>Skin Tone: {{ skin_tone }}</h3>
+            
+            {% if colors %}
+                <h3>Recommended Colors:</h3>
+                <div class="color-container">
+                    {% for color in colors %}
+                        <div class="color-box" 
+                            style="background-color: {{ color | lower }};" 
+                            onclick="window.location.href='/show_dresses?color={{ color | lower }}'">
+                            {{ color | title }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No color recommendations available.</p>
+            {% endif %}
+
+            {% if dresses %}
+                <h3>Best Outfits for Your Body Shape ({{ body_shape }})</h3>
+                <ul>
+                    {% for dress in dresses %}
+                        <li>{{ dress }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No outfit recommendations available.</p>
+            {% endif %}
+
+            <!-- Try Again Button -->
+            <form action="/" method="GET">
+                <button type="submit" class="try-again">Try Again</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

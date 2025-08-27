@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Detection</title>
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <input type="file" id="fileInput">
+    <button onclick="uploadImage()">Detect Skin</button>
+    <br><br>
+    <h3>Original Image:</h3>
+    <img id="originalImage" width="300">
+    <h3>Detected Skin:</h3>
+    <img id="skinImage" width="300">
+    <h3>Skin Tone:</h3>
+    <p id="skinTone"></p>
+
+    <script>
+        function uploadImage() {
+            let fileInput = document.getElementById("fileInput").files[0];
+            if (!fileInput) {
+                alert("Please select an image.");
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("file", fileInput);
+
+            // Display original image
+            document.getElementById("originalImage").src = URL.createObjectURL(fileInput);
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.skin_image) {
+                    document.getElementById("skinImage").src = data.skin_image;
+                    document.getElementById("skinTone").innerText = "Detected Skin Tone: " + data.skin_tone;
+                } else {
+                    alert("Error detecting skin.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    </script>
+</body>
+</html>

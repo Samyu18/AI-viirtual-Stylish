@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Your Style Mood Board ✨</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .moodboard-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #6b46c1;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .style-quote {
+            text-align: center;
+            color: #718096;
+            font-style: italic;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .price-range-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        .price-range-label {
+            color: #4a5568;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .price-slider {
+            width: 100%;
+            margin: 20px 0;
+        }
+        .price-values {
+            display: flex;
+            justify-content: space-between;
+            color: #718096;
+        }
+        .body-type-dropdown {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        .recommendations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        .outfit-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .outfit-card:hover {
+            transform: translateY(-5px);
+        }
+        .outfit-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+        .outfit-info {
+            padding: 20px;
+        }
+        .outfit-name {
+            font-size: 1.2em;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        .outfit-description {
+            color: #718096;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        .get-suggestions-btn {
+            background: linear-gradient(90deg, #b47aea, #6a82fb);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .get-suggestions-btn:hover {
+            opacity: 0.9;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #718096;
+        }
+        .outfit-price {
+            font-size: 1.2em;
+            color: #48bb78;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="moodboard-container">
+        <h1>✨ Create Your Style Mood Board ✨</h1>
+        <div class="style-quote">Your style is a reflection of your inner beauty ✨</div>
+
+        <div class="price-range-section">
+            <div class="price-range-label">Price Range (₹)</div>
+            <input type="range" class="price-slider" min="0" max="10000" step="500" value="{{ selected_price }}" id="priceSlider">
+            <div class="price-values">
+                <span>₹0</span>
+                <span>₹2.5K</span>
+                <span>₹5K</span>
+                <span>₹7.5K</span>
+                <span>₹10K</span>
+            </div>
+            <div class="current-price" style="text-align: center; margin: 10px 0; font-weight: bold; color: #6b46c1;">
+                Current Price: ₹<span id="currentPrice">{{ selected_price }}</span>
+            </div>
+
+            <select class="body-type-dropdown" name="body_type">
+                <option value="">All Body Types</option>
+                <option value="Hourglass" {% if selected_body_type == 'Hourglass' %}selected{% endif %}>Hourglass</option>
+                <option value="Top Hourglass" {% if selected_body_type == 'Top Hourglass' %}selected{% endif %}>Top Hourglass</option>
+                <option value="Bottom Hourglass" {% if selected_body_type == 'Bottom Hourglass' %}selected{% endif %}>Bottom Hourglass</option>
+                <option value="Rectangle" {% if selected_body_type == 'Rectangle' %}selected{% endif %}>Rectangle</option>
+                <option value="Triangle (Pear)" {% if selected_body_type == 'Triangle (Pear)' %}selected{% endif %}>Triangle (Pear)</option>
+                <option value="Inverted Triangle" {% if selected_body_type == 'Inverted Triangle' %}selected{% endif %}>Inverted Triangle</option>
+                <option value="Round (Apple)" {% if selected_body_type == 'Round (Apple)' %}selected{% endif %}>Round (Apple)</option>
+            </select>
+        </div>
+
+        <form id="moodboardForm" method="POST" style="display: none;">
+            <input type="hidden" name="price_range" id="priceRangeInput">
+            <input type="hidden" name="body_type" id="bodyTypeInput">
+        </form>
+
+        <div class="recommendations-grid">
+            {% for outfit in outfits %}
+            <div class="outfit-card">
+                <img src="{{ outfit.image }}" alt="{{ outfit.name }}" class="outfit-image">
+                <div class="outfit-info">
+                    <h3 class="outfit-name">{{ outfit.name }}</h3>
+                    <p class="outfit-description">{{ outfit.description }}</p>
+                    <div class="outfit-price">₹{{ "{:,}".format(outfit.price) }}</div>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% if not outfits %}
+            <div class="no-outfits" style="text-align: center; grid-column: 1 / -1; padding: 40px;">
+                <h3 style="color: #718096;">No outfits found matching your criteria</h3>
+                <p style="color: #a0aec0;">Try adjusting the price range or body type</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <button class="get-suggestions-btn" onclick="updateMoodboard()">Update Mood Board →</button>
+    </div>
+
+    <script>
+        const priceSlider = document.getElementById('priceSlider');
+        const currentPrice = document.getElementById('currentPrice');
+        const bodyTypeDropdown = document.querySelector('.body-type-dropdown');
+        const moodboardForm = document.getElementById('moodboardForm');
+        const priceRangeInput = document.getElementById('priceRangeInput');
+        const bodyTypeInput = document.getElementById('bodyTypeInput');
+
+        // Update current price display
+        function updatePriceDisplay() {
+            const price = parseInt(priceSlider.value);
+            currentPrice.textContent = price.toLocaleString('en-IN');
+        }
+
+        // Initialize price display
+        updatePriceDisplay();
+
+        // Add event listeners
+        priceSlider.addEventListener('input', updatePriceDisplay);
+
+        function updateMoodboard() {
+            priceRangeInput.value = priceSlider.value;
+            bodyTypeInput.value = bodyTypeDropdown.value;
+            moodboardForm.submit();
+        }
+
+        // Add smooth transitions for outfit cards
+        document.querySelectorAll('.outfit-card').forEach(card => {
+            card.style.transition = 'transform 0.3s ease, box-shadow 0.3s ease';
+        });
+    </script>
+</body>
+</html> 

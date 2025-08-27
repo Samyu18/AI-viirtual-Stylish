@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Style Quiz - Style Studio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .quiz-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 90%;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #6B46C1;
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .question {
+            margin-bottom: 30px;
+        }
+        .question h2 {
+            color: #6B46C1;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .option:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+        .option input[type="radio"] {
+            display: none;
+        }
+        .option label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            cursor: pointer;
+            color: #4A5568;
+            font-size: 1.1em;
+        }
+        .option label::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6B46C1;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+        .option input[type="radio"]:checked + label::before {
+            background-color: #6B46C1;
+            box-shadow: inset 0 0 0 4px white;
+        }
+        .option input[type="radio"]:checked + label {
+            color: #6B46C1;
+            font-weight: 500;
+        }
+        button {
+            background: #6B46C1;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1em;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            background: #553C9A;
+        }
+        .quiz-title {
+            text-align: center;
+            color: #6B46C1;
+            font-size: 2em;
+            margin-bottom: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .quiz-title::before,
+        .quiz-title::after {
+            content: '✨';
+            color: #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <div class="quiz-title">Discover Your Style Persona</div>
+        <form action="/quiz_results" method="post">
+            <div class="question">
+                <h2>✨ What's your ideal weekend outfit?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="style_aesthetic" id="comfy" value="minimal">
+                        <label for="comfy">Comfy oversized sweater and leggings 🧸</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="style_aesthetic" id="sleek" value="glamorous">
+                        <label for="sleek">Sleek blazer and tailored pants 👔</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="style_aesthetic" id="vintage" value="streetwear">
+                        <label for="vintage">Vintage tee and ripped jeans 👕</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="style_aesthetic" id="flowy" value="bohemian">
+                        <label for="flowy">Flowy dress and statement accessories 👗</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ Which colors do you gravitate towards?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="color_preference" id="neutrals" value="neutrals">
+                        <label for="neutrals">Classic neutrals and earth tones 🤎</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="color_preference" id="bold" value="bold">
+                        <label for="bold">Bold and vibrant colors 🌈</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="color_preference" id="pastels" value="pastels">
+                        <label for="pastels">Soft pastels and muted shades 🌸</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="color_preference" id="monochrome" value="monochrome">
+                        <label for="monochrome">Monochrome black and white ⚫️</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ How do you prefer your clothes to fit?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="fit_preference" id="loose" value="loose">
+                        <label for="loose">Loose and comfortable 🌊</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="fit_preference" id="fitted" value="fitted">
+                        <label for="fitted">Fitted and structured ✨</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="fit_preference" id="mix" value="mix">
+                        <label for="mix">Mix of both depending on mood 🎭</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ What's your favorite accessory style?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="accessory_style" id="minimal" value="minimal">
+                        <label for="minimal">Delicate and minimal jewelry ✨</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="accessory_style" id="statement" value="statement">
+                        <label for="statement">Bold statement pieces 💎</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="accessory_style" id="layered" value="layered">
+                        <label for="layered">Layered and mixed metals 🔗</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="accessory_style" id="vintage" value="vintage">
+                        <label for="vintage">Vintage and unique finds 🎭</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ What's your go-to footwear?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="footwear" id="sneakers" value="sneakers">
+                        <label for="sneakers">Trendy sneakers 👟</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="footwear" id="heels" value="heels">
+                        <label for="heels">Classic heels 👠</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="footwear" id="boots" value="boots">
+                        <label for="boots">Stylish boots 👢</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="footwear" id="flats" value="flats">
+                        <label for="flats">Comfortable flats 🥿</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ What's your favorite season for fashion?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="season" id="spring" value="spring">
+                        <label for="spring">Spring - Light layers and florals 🌸</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="season" id="summer" value="summer">
+                        <label for="summer">Summer - Bright and breezy ☀️</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="season" id="fall" value="fall">
+                        <label for="fall">Fall - Cozy and layered 🍂</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="season" id="winter" value="winter">
+                        <label for="winter">Winter - Sophisticated and warm ❄️</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question">
+                <h2>✨ What's your style inspiration source?</h2>
+                <div class="options">
+                    <div class="option">
+                        <input type="radio" name="inspiration" id="social" value="social">
+                        <label for="social">Social media and influencers 📱</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="inspiration" id="celebrities" value="celebrities">
+                        <label for="celebrities">Celebrity street style 🌟</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="inspiration" id="magazines" value="magazines">
+                        <label for="magazines">Fashion magazines and runways 📖</label>
+                    </div>
+                    <div class="option">
+                        <input type="radio" name="inspiration" id="personal" value="personal">
+                        <label for="personal">My own unique vision 🎨</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Discover Your Style ✨</button>
+        </form>
+    </div>
+</body>
+</html> 
